@@ -1,64 +1,62 @@
-# OC/DS Projet 5 : Segmentez des clients d'un site e-commerce
-Formation OpenClassrooms - Parcours data scientist - Projet Professionnalisant (Février - Mars 2023)
+# Customer Segmentation
 
-## Secteur : 
-Communication et marketing ; Commerce et distribution
+**OpenClassrooms — Data Scientist Path | Project 5** (February – March 2023)
 
-## Technologies utilisées : 
-  * Jupyter Notebook
-  * Python
+> Note: project deliverables (notebooks, presentation) are in French.
 
-## Mots-clés : 
-classification non supervisée, clustering, ACP
+## Sectors
+Marketing & Communication · E-commerce & Retail
 
-## Le contexte : 
-Les équipes marketing du site e-commerce brésilien Olist souhaitent optimiser leurs campagnes de communication. Pour cela elles ont besoin d’identifier les différents profils de consommateurs qui achètent en passant par le site.
+## Tech Stack
+- Jupyter Notebook
+- Python: scikit-learn, pandas, numpy, matplotlib, seaborn
 
-## La mission : 
-Proposer un modèle permettant de regrouper les clients au comportement similaire en segments facilement utilisables par le service marketing.
+## Keywords
+unsupervised learning, clustering, PCA, RFM features, model maintenance
 
-Établir un contrat de maintenance estimant la fréquence à laquelle le modèle doit être mis à jour, i.e. ré-entrainé, pour que la segmentation obtenue reste pertinente.
+## Context
+The marketing teams of Olist, a Brazilian e-commerce marketplace, want to optimise their communication campaigns. To do so, they need a clear picture of the different consumer profiles purchasing through the platform.
 
- ## Livrables :
- * notebook_exploration.ipynb : notebook de l'analyse exploratoire
- * notebook_modelisation.ipynb : notebook d’essais des différentes approches de modélisation
- * notebook_maintenance.ipynb : notebook de simulation pour déterminer la fréquence nécessaire de mise à jour du modèle de segmentation
- * toolbox.py : fonctions utilisées dans le notebook
- * presentation.pdf : support de présentation pour la soutenance
+## Mission
+- Build a clustering model that groups customers with similar behaviours into segments that are directly usable by the marketing team.
+- Establish a **maintenance contract**: simulate how quickly the segmentation degrades over time and estimate how frequently the model should be retrained to remain relevant.
 
-## Algorithme retenu : 
-KMeans
+## Selected Algorithm
+**KMeans**
 
-## Méthodologie suivie : 
-1. Nettoyage du jeu de données :
-* aggrégation des différentes tables
-* imputation valeurs manquantes
-* traitement des valeurs extrêmes
+## Deliverables
+- `notebook_exploration.ipynb` — exploratory data analysis
+- `notebook_modelisation.ipynb` — modelling experiments across different algorithms and feature sets
+- `notebook_maintenance.ipynb` — simulation to determine the required model update frequency
+- `toolbox.py` — helper functions used across notebooks
+- `presentation.pdf` — presentation slides (in French)
 
-2. Traitement des données :
-* feature engineering : variables RFM
-* transformation des variables (StandardScaler, Passage au logarithme)
+## Methodology
 
-3. Modélisation :
-* test différents algo et combinaisons de variables :
-	- DBSCAN
-	- Classification Hiérarchique Ascendante
-	- Kmeans
-* choix du meilleur modèle selon 3 critères :
-	- les clusters ont du sens quand on les compare aux connaissances spécifiques au domaine (boxplots, radarplots)
-	- les clusters sont équilibrés (diagramme circulaire)
-    - les clusters sont homogènes et séparés (coefficient de silhouette)
+1. **Data cleaning**
+   - Aggregate multiple relational tables into a single customer-level dataset
+   - Impute missing values and handle outliers
 
-4. Simulation pour déterminer la fréquence nécessaire de mise à jour du modèle de segmentation :
-* à chaque intervalle de temps ti on compare les clusterings de Mi sur Ci et de M0 sur Ci, en calculant l'indice de Rand ajusté. 
-* le modèle devra être réentrainé dès que l'indice de Rand Ajusté passe en dessous de 0.8 
+2. **Feature engineering & preprocessing**
+   - Build RFM features (Recency, Frequency, Monetary value)
+   - Apply StandardScaler and log transformations
 
+3. **Modelling**
+   - Benchmark three algorithms: DBSCAN, Agglomerative Hierarchical Clustering, KMeans
+   - Select the best model based on three criteria:
+     - **Business relevance**: segments make sense when compared against domain knowledge (boxplots, radar charts)
+     - **Balance**: segments are roughly balanced in size (pie chart)
+     - **Cohesion & separation**: measured with the Silhouette coefficient
 
-## Compétences acquises :  
-* Adapter les hyperparamètres d’un algorithme non supervisé afin de l’améliorer
-* Évaluer les performances d’un modèle d’apprentissage non supervisé
-* Transformer les variables pertinentes d’un modèle d’apprentissage non supervisé
-* Mettre en place le modèle d’apprentissage non supervisé adapté au problème métier
+4. **Maintenance simulation**
+   - At each time interval *tᵢ*, compare the clustering of *M₀* on *C₀* vs. *M₀* on *Cᵢ* using the Adjusted Rand Index
+   - Define retraining trigger: model should be retrained when the Adjusted Rand Index drops below 0.8
 
-## Data source : 
-https://www.kaggle.com/olistbr/brazilian-ecommerce
+## Skills
+- Selecting and tuning unsupervised learning algorithms for a business problem
+- Engineering and transforming features for clustering models
+- Evaluating clustering quality with relevant metrics
+- Simulating model drift to define a maintenance strategy
+
+## Data Source
+[Kaggle — Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/olistbr/brazilian-ecommerce)
